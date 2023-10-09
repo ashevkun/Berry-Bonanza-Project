@@ -1,0 +1,81 @@
+WEATHER
+
+temp –      temperature at the location. Daily values are average values (mean) for the day.
+dew –       dew point temperature             https://en.wikipedia.org/wiki/Dew_point
+            "The dew point is the temperature to which air must be cooled to become saturated with water vapor, 
+            assuming constant air pressure and water content. When cooled below the dew point, 
+            moisture capacity is reduced and airborne water vapor will condense to form liquid water known as dew.[1] 
+            When this occurs via contact with a colder surface, dew will form on that surface.[2]
+
+            The dew point is affected by humidity. When there is more moisture in the air, the dew point is higher.[3]"
+
+winddir –   direction from which the wind is blowing
+
+pressure –  the sea level atmospheric or barometric pressure in millibars (or hectopascals)
+
+cloudcover –how much of the sky is covered in cloud ranging from 0-100%
+
+solarradiation – (W/m2) the solar radiation power at the instantaneous moment of the observation (or forecast prediction). 
+                See the full solar radiation data documentation and Wind and Solar Energy pages .
+
+solarenergy –   (MJ /m2 ) indicates the total energy from the sun that builds up over an hour or day. 
+                See the full solar radiation data documentation and Wind and Solar Energy pages .
+
+moonphase –  represents the fractional portion through the current moon lunation cycle ranging 
+            from 0 (the new moon) to 0.5 (the full moon) and back to 1 (the next new moon). 
+            See How to include sunrise, sunset, moon phase, moonrise and moonset data into your API requests
+
+
+
+
+Appendix: Full description for the forest inventory data
+Variables Description
+
+pk      ETRS-TM35FIN y-coordinate
+ik      ETRS-TM35FIN x-coordinate, km
+osite   sample area
+lohko   sample area group index
+koeala  sample number
+kuvio   number of land plot
+koko9   land plot portion in 9m sample area
+koko564 land plot portion in 5.64m sample area
+kunta   municipality number
+maku    county
+vv      measurement year
+mluok   land class (forest, swamp etc.)
+fra     land class by FAO
+alar    growth location main type
+* kpty    growth location type
+kptylm  growth location additional type
+mlmuut  previous land type and land type additional information
+ojtil   ditching condition
+pt      wood production limitation, 1=no production, 2=limited production, 3=full production
+maalaji land type
+jaksot  timber period count
+khlk    development class
+valli   dominant timber period's dominant tree type
+ppa     timber area in the land plot
+kasru   seedlings, amount of trees per hectar in land plot
+klpm    dominant timber period, average diameter of trees, cm, within land plot
+kpituus dominant timber period, average height of trees, dm, within land plot
+ika     dominant timber period, average age of trees, within land plot
+kokru   dominant timber period, total amount of trees, within land plot
+laatu   wood quality
+thakm   logging done or not
+thakam  datetime of logging
+vu      living trees, volume in sample area land plot, m3/hectar
+vuma    pine trees, volume in sample area land plot, m3/hectar
+vuku    spruce trees, volume in sample area land plot, m3/hectar
+vuko    birch trees, volume in sample area land plot, m3/hectar
+vuml    other leafy trees, volume in sample area land plot, m3/hectar
+bm1     living trees, biomass for trunk, branches, needles: thousands/hectar
+bm2     living trees, biomass for stump and roots over 1cm
+bm1ma   pine trees, biomass for trunk, branches, needles: thousands/hectar
+bm2ma   pine trees, biomass for stump and roots over 1cm
+bm1ku   spruce trees, biomass for trunk, branches, needles: thousands/hectar
+bm2ku   spruce trees, biomass for stump and roots over 1cm
+bm1ko   birch trees, biomass for trunk, branches, needles: thousands/hectar
+bm2ko   birch trees, biomass for stump and roots over 1cm
+bm1ml   other leafy trees, biomass for trunk, branches, needles: thousands/hectar
+bm2ml   other leafy trees, biomass for stump and roots over 1cm
+n_l     sample area land plot, amount of measured living trees

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Project Results</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="assets/css/berries_style.css" >
+    </head>
+    <body>
+        <main>
+            <div>
+                <h1>Berry Bonanza</h1>
+            </div>
+
+            <section class="project_results shadow container">
+                <h2>Project Results</h2>
+                <div class="res results_descr">
+                    <h3 class="gen"> General information about the data and the process.</h3>
+                    <ul>
+                        <li>Main berry data was acquired from Natural Resuorces Finland. Original data had Finnish ETRS89 coordinate 
+                            system it has been converted to WSG84 system by using 
+                            https://fmnh-ws-prod.it.helsinki.fi/tipu-api/coordinates. Due to variation some coordinates can be slightly differed then the origin one.</li>
+                        <li>The weather and precipitation data was acquired from 
+                            https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/.</li> 
+                        <li>Forest data was acquired from https://opendata.luke.fi/dataset/national-forest-inventory-nfi-vmi12.</li>
+                        <li>Regions` data was acquired from https://api.bigdatacloud.net/data/reverse-geocode-client?latitude={lat}&longitude={lon}&localityLanguage=en.</li>
+                        <li>Analysis were performed after combination of these data sets.</li>
+                        <li>Main berry data set consist of around 360 data for bilbery, 300 data for lingon berry and 175 data for cloudberry. 
+                                So data set is not balanced in terms of berry types.</li>
+                        <li>Observed years are 2018, 2019, 2020, 2021 and 2022</li>
+                        <li>Due to data does not contain any metric information analysis were done based on only berry observations which caused limited analysis.</li>
+                        <li>Visual Studio Code is the open-source software which has been used during data analysis and plotting with Python language via Pandas and Seaborn modules.</li>
+
+                    </ul>
+                    
+                    <h3 class="gen">Information obtained during workshops from: https://www.luontoon.fi/marjastusjasienestys/marjastus.</h3>
+                    <ul>
+                        <p>Cloudberry:</p>
+
+                        <li>Berries grow on different types of swamps (with or without trees). Typically best harvests are in Lapland and Middle parts of Finland (Pohjois-Pohjanmaa and Kainuu)
+                            Cloudberries are sensitive to days without sun and too much humidity, because pollinators won't be present as much.
+                            Cloudberries are super-sensitive to subzero -temperatures, and will be destroyed by nightly low temperatures.</li>
+
+
+                        <p>Bilberry:</p>
+                        <li>Typically grows in spruce forest areas, especially with fresh and dry boreal forest (South Finland). 
+                            Also grows on more arid boreal lands (North Finland). Bilberries typically grow in shadowy locations 
+                            than in direct sunlight. Nightly sub-zero temperatures also very harmful for bilberries. 
+                            Also a summer too dry is harmful for bilberries.</li>
+
+
+                        <p>Lingonberry:</p>
+                        <li>Grows throughout Finland in dry boreal forests but also in swamps and deep forest. 
+                            Lingonberry grows best in sunlight and forest, where the trees don't block the sun 
+                            too much for the berries. Lingonberry is not as sensitive to nightly subzero 
+                            temperatures due to later growing season than bilberry and cloudberry.</li>                                                       
+                    </ul>
+                </div>
+                <div class="prj_info">
+                    <h3>Berry Types and Distributions Over the Years</h3>
+                    <a href="assets/img/Plot pictures/Berries_years.png">
+                        <img id="b_types_img" src="assets/img/Plot pictures/Berries_years.png">
+                    </a>
+                    <ul>
+                        <li>Lingonberry observation consecutively increased over the years.</li>
+                        <li>Bilberry observation was minimum in 2019 and maximum in 2020.</li>
+                        <li>Cloudberry observation has the less volatility over the years.</li> 
+                        <li>Data set consist of 375 data for bilbery, 310 data for lingonberry and 171 data for cloudberry.</li>
+                        <li>So the data set is not balanced in terms of berry types.</li>
+
+                    </ul>                           
+                </div>
+                <article class="mini">
+                    <div class="mini_container">
+                        <h2>Overall Berries Distribution</h2>
+                        <a href="assets/img/Plot pictures/finland_all_berries.png">
+                            <img src="assets/img/Plot pictures/finland_all_berries.png">
+                        </a>
+                        
+                        <div class="text">
+                            <ul id="overall">                                
+                                <li>The regions are categorized based on the observation coordinates that is matching in the Bigdata source</li>
+                                <li>The most bilberry observed region is Western Finland with 88 times and the least one is Western and Central Finland with 8 times.</li>
+                                <li>The most cloudberry observed region is Northern Finland with 146 times and the least one is Southern Finland with 2 times.</li> 
+                                <li>The most lingonberry observed region is Northern Finland with 234 times  and the least one is Western and Central Finland with 18 times.</li>                                                           
+                            </ul>
+                        </div> 
+
+                    </div>
+                </article>
+                <article class="mini">
+                    <div class="mini_container">
+                        <h2>Highest 3 distinct observations</h2>
+                        <a href="assets/img/Plot pictures/highest_3_observation.png">
+                            <img src="assets/img/Plot pictures/highest_3_observation.png">
+                        </a>
+                        
+                        <div class="text">
+                            <p>At the 3 distinct highest altitude levels in data set observations are respectively as follows;</p>
+                            <div class="text">
+                                <ul id="highest_obs">
+                                    <li>elevations are 302.4m, 302.2m and 293.8m</li>
+                                    <li>city is Kuusamo in Northern region</li>
+                                    <li>berry types are cloudberries and lingonberry</li>
+                                    <li>tree type is only pine</li>
+                                    <li>observation dates are 2019-08-06, 2022-08-26 and 2022-07-23</li>
+                                    <li>temperatures are 7.4, 14.8, 16.2</li>
+                                    <li>wood qualities are 2.0, 2.55 and 2.50</li>
+                                    <li>forest classes are plantation and old</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="mini">
+                    <div class="mini_container">
+                        <h2>Lowest 3 distinct observations</h2>
+                        <a href="assets/img/Plot pictures/lowest_3_observation.png">
+                            <img src="assets/img/Plot pictures/lowest_3_observation.png">
+                        </a>
+                        
+                        <div class="text">
+                            <p>At the 3 distinct lowest altitude levels in data set observations are respectively as follows;</p>
+                            <div class="text">
+                                <ul id="lowest_obs">
+                                    <li>elevations are -4.1m, 0.7m and 12.5m</li>
+                                    <li>cities are Hirsala, Bromarf and Jolkby in Southern region</li>
+                                    <li>berry types are bilberry, lingonberry and cloudberry</li>
+                                    <li>tree types are generally pine</li>
+                                    <li>observation dates are 2018-08-08, 2020-08-31 and 2018-07-20</li>
+                                    <li>temperatures are 18.2, 13.4 and 20.5</li>
+                                    <li>wood qualities are 2.0, 2.3 and 2.7</li>
+                                    <li>forest class is only old</li>
+                                </ul>
+                        </div>
+                    </div>
+                </article>
+                <article class="mini">
+                    <div class="mini_container">
+                        <h2>The Most Billberry Observed City - Rovaniemi</h2>
+                        <a href="assets/img/Plot pictures/Rovaniemi_most_bilberry.png">
+                            <img src="assets/img/Plot pictures/Rovaniemi_most_bilberry.png">
+                        </a>
+                        
+                        <div class="text">
+                            <ul id="bilb_rov">
+                                <li>The most bilberry observed city is Rovaniemi with 20 times in Lapland region.</li>
+                                                               
+                            </ul>                           
+                        </div>
+                    </div>
+                </article>
+                <article class="mini">
+                    <div class="mini_container">
+                        <h2>The Most Common Observed City - Taivalkoski</h2>
+                        <a href="assets/img/Plot pictures/Taivalkoski_most_common_observed_city.png">
+                            <img src="assets/img/Plot pictures/Taivalkoski_most_common_observed_city.png">
+                        </a>
+                        
+                        <div class="text">
+                            <ul id="taivalkoski_city">
+                                <li>Regardles of the berry type, the most observed city together with berries is Taivalkoski with 55 times in Northern region.</li>
+                                <li>Additionally, the most lingonberry observed city is Taivalkoski with 14 times in Northen region.</li>
+                                <li>Also the most cloudberry observed city is Taivalkoski with 31 times in Northern region.</li>                           
+                            </ul>                           
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="mini">
+                    <div class="mini_container">
+                        <h2>Week number & Temperatures</h2>
+                        <a href="assets/img/Plot pictures/temp_decreasing.png">
+                            <img src="assets/img/Plot pictures/temp_decreasing.png">
+                        </a>
+                        
+                        <div class="text">
+                            <ul id="week_tmp">
+                                <li>All berry types were observed when temperatures were decreasing, exceptionally;</li>
+                                <li>Cloudberries were observed when temperature was increasing.</li>                                
+                            </ul>                           
+                        </div>
+                    </div>
+                </article>
+                <article class="mini">
+                    <div class="mini_container">
+                        <h2>Temperatures & Humidity</h2>
+                        <a href="assets/img/Plot pictures/humidity_temperature.png">
+                            <img src="assets/img/Plot pictures/humidity_temperature.png">
+                        </a>
+                        
+                        <div class="text">
+                            <ul id="temp_hum">
+                                <li>Lingonberry mostly observed below 20 °C and above 70% humidity.</li>
+                                <li>Below 5°C only lingonberry observed, except cloudberry outlayer.</li>                                
+                            </ul>                           
+                        </div>
+                    </div>
+                </article>
+                <article class="mini">
+                    <div class="mini_container">
+                        <h2>Week number & Temperatures</h2>
+                        <a href="assets/img/Plot pictures/2018_warmest_year.png">
+                             <img src="assets/img/Plot pictures/2018_warmest_year.png">
+                        </a>
+                       
+                        <div class="text">
+                            <ul id="wn_temp">
+                                <li>2018 is warmest year in the data set with average of 18.32 °C among the seasons</li>
+                                <li>Other years` average temperature is around 14 °C in the season</li>
+                                <li>Accordingly in 2018 first cloudberry observation was 4-6 weeks earlier than other years.</li>                                
+                            </ul>                           
+                        </div>
+                </article>
+                  
+                <article class="mini">
+                    <div class="mini_container">
+                        <h2>Wood Quality & Forest Types</h2>
+                        <a href="assets/img/Plot pictures/best_wood_qualities.png">
+                            <img src="assets/img/Plot pictures/best_wood_qualities.png">
+                        </a>
+                        
+                        <div class="text">
+                            <ul id="wood_qual">
+                                <li>Best wood qualities are observed after 150m altitude.</li>
+                                <li>All berry types have better observation at clearing forest development class.</li>
+                                <li>Pine and spurce are most common observed two main tree types and they are observed in all altitudes,</li>
+                                <li>after them, birch is observed less likely tree type.</li>
+                                <li>Swamp areas were observed between 100m and 230m.</li>
+                                <li>Clearing forest type were observed after 60m altitudes.</li>
+                                <li>While generally cloudberries observation period is shorter than others, at swamp and pine tree type and,
+                                    in clearing forest development class, it lasts longer.</li>                                                                                                
+                            </ul>                           
+                        </div>
+                    </div>
+                </article>
+                <article class="mini">
+                    <div class="mini_container">
+                        <h2>Altitudes & Week Numbers</h2>
+                        <a href="assets/img/Plot pictures/altitudes_weeks_berries.png">
+                          <img src="assets/img/Plot pictures/altitudes_weeks_berries.png">  
+                        </a>
+                        
+                        <div class="text">
+                            <ul id="altitudes">
+                                <li>When week number increase temperature increase, when temperature increase, berries start to be observed at higher altitudes.</li>
+                                <li>Cloudberry observation occurs at higher altitudes than bilberry and lingonberry.</li>
+                                <li>Mostly first cloudberries and bilberies were observed around 26th-28th week when the temperature was between 12°C and 15°C.</li>
+                                <li>Lingonberries observation start at 31th week.</li>
+                                <li>Mostly cloudberries and bilberies observation end around 33th-34th week.</li>
+                                <li>Lingonberry observation ends around 41th week.</li>
+                                <li>All berry types are observed in all altitudes but below 100m cloudberry and above 250m lingonberry 
+                                    are less likely.</li>                                                                                                                               
+                            </ul>                           
+                        </div>
+                </article>
+                <article class="mini">
+                    <div class="mini_container">
+                        <h2>Week numbers & Regions</h2>
+                        <a href="assets/img/Plot pictures/regions_berries.png">
+                            <img src="assets/img/Plot pictures/regions_berries.png"> 
+                        </a>
+                       
+                        <div class="text">
+                            <ul id="regions">
+                                <li>Cloudberry observation in Western and Southern Finland is very rare.</li>
+                                <li>While bilberies and lingonberries observation last around 8 weeks, cloudberries observation last around 5 weeks,
+                                    more densly 3 weeks over the regions.</li>                                                              
+                            </ul>                           
+                        </div>
+                    </div>
+                </article>
+
+                <article id="mini_last" class="mini">
+                    <div class="prj_info">
+                    <h3>Precipitation & Years</h3>
+                    <a href="assets/img/Plot pictures/Precipitation_Years.png">
+                        <img id="precipit_years" src="assets/img/Plot pictures/Precipitation_Years.png"> 
+                    </a>
+                    <ul>
+                        <li>2018 is the driest year.</li>
+                        <li>2020 is the most precipitation occured year.</li>
+                        <li>2019 lowest temperature and precipitation occured year; accordingly less berry observation, especially lowest cloudberry 
+                            observations among the years.</li>
+                        <li>It is quite difficult to make analysis regarding berries` connection to precipitation due to the following reasons;</li>
+                        <li>In 2018 precipitationcover was lowest but precipitation is similar to 2020, 2021 and 2022,</li>  
+                        <li>In 2020 precipitationcover is the highest but in 2022 precipitaton is the highest and generally total berry observation is similar, 
+                            while bilberry observation is the highest with small difference in 2020.</li> 
+                        <li>Precipcover variable gives the daily non-zero precipitation information and it cannot effect the observation immediately.</li>
+                        <li>Precip varibale gives information about precipitation that fell or is predicted to fall in the period but it would be much 
+                            more better if the whole year precipitation data was present for better comparisons.</li>
+                        <li>In this regard weekly observations do not give valuable results though.</li>
+                                                                                    
+                    </ul>                           
+                </div>
+                </article>
+                
+            </section>
+        </main>
+        
+    </body>
+</html>

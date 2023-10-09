@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            List of the data sets
+        </title>
+
+        <style>
+            table, tr, td, th {border:1px solid black;}
+
+            table.td.link:link {
+                color: blue;
+            }
+            
+            th {background-color:bisque;}
+
+            legend {
+                background-color:#b0f6f6;
+                font-size: 18px;
+            }
+            
+            fieldset {margin-top: 15px;
+            background-color: rgb(248, 241, 233);}           
+
+            h2 {color:chocolate;}
+
+            .row {
+                display: inline-block;
+            }
+
+            .fr {
+                display: inline;
+            }
+
+            .ext {
+                margin-right: 25px;
+            }
+            td {
+                text-align: center;
+                padding: 3px;
+            }
+
+            table.table2 tr:nth-child(even){
+                background-color: #D6EEEE;    
+            }
+
+            .check_info{
+                margin-bottom: 5px;
+                
+            }
+
+            .messageCheckbox{
+                margin-bottom: auto;
+                
+            }
+
+
+            div.messageCheckbox_div{
+                margin-bottom: 25px;
+                accent-color: chocolate;
+                font-size: 18px;
+            }
+
+            select {                
+                font-size: 18px;
+                width: 250px; 
+            }
+
+            select[id="city_option"]:hover {
+                color: chocolate;                              
+            }
+
+            select option:hover {
+                color: chocolate;                
+                font-size: 16px;               
+            }
+
+            option:checked {  
+                background-color: #D6EEEE;
+            }
+
+            p.note {
+                color: chocolate;
+                font-size: 18px;
+                padding: 3px;
+            }
+
+        </style>
+    </head>
+
+
+    <body>       
+
+
+        <fieldset>
+            <legend>Berry Bonanza Project</legend>
+            <h2>List of the data sets</h2>            
+           
+
+            <h3 class="check_info">Uncheck berry type to remove from list</h3><br/>
+            <div class="messageCheckbox_div">
+                
+                
+                <input class="messageCheckbox" type="checkbox" name="check" id="bilberry" value="Bilberry" checked>                
+                <label for="bilb">Bilberry</label><br/>
+
+                <input class="messageCheckbox" type="checkbox" name="check" id="cloudberry" value="Cloudberry" checked>                
+                <label for="cloudb">Cloudberry</label><br/>
+
+                <input class="messageCheckbox" type="checkbox" name="check" id="lingonberry" value="Lingonberry" checked>                
+                <label for="lingonb">Lingonberry</label><br/>
+
+
+            </div>
+            
+            
+            <div>
+                <h3 class="row" >Choose city name to filter :</h3>
+                    <select id="city_option"></select>
+                    
+                    
+                    
+                </select>
+                <p class="note"><b>To have the full list back, refresh the page.</b></p>
+                <p class="note"><b>To see the observation place on the map, click on to the coordinate.</b></p>
+                <p class="note"><b><strong>Note:</strong> Original coordinates were not so sensitive, there can be some deviation.</b></p>
+
+
+            </div>
+
+
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border"
+                    role="status" id="loading">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
+            <table class="table2" id="data_table"></table> 
+
+        </fieldset>
+
+
+
+
+        <script>
+
+            // Listening events for the proper filtering
+            document.getElementsByName("check").forEach(chc => chc.addEventListener('change', radioEventListener))
+            document.getElementById("city_option").addEventListener('change', radioEventListener)
+            document.getElementById("city_option").addEventListener('change', drop_filter_selected)
+             
+
+            // Local json file
+            const api_url ="./berry_file.json";
+            var data;
+            // Defining async function
+            async function getapi(url) {
+            
+                // Storing response
+                const response = await fetch(url);
+                
+                // Storing data in form of JSON
+                data = await response.json();
+                console.log(data);
+                if (response) {
+                    hideloader();
+                }
+
+                // Calling function which has table display; show_table()
+                show_table ();               
+            
+
+                // Collecting cities into a list
+                let cities = []
+                for (i=0; i < data.data.length; i++){    
+                    r = data.data[i][10]
+                    
+                    cities.push(r)          
+                    
+                ;}
+                                
+                // Creating unique city list by filtering
+                var unique_cities = cities;
+                var unique = unique_cities.filter(onlyUnique);
+                
+                // Sorting the unique city list in alphabetic order
+                var sorted_unique = unique.sort(sort_alfabetical)
+
+                // Function for alphabetic order
+                function sort_alfabetical(a,b) {                
+                    if(a < b) return -1
+                    else return 1
+                }
+  
+                // Calling function to display dropdown unique city list
+                city_list(sorted_unique)
+            }
+
+            
+            // Calling that async function for fetching the data 
+            getapi(api_url);
+
+
+            // Creating option for select division for dropdown list
+            function city_list (city_l) {
+
+                select = document.getElementById('city_option')
+                for (var i =0; i< city_l.length; i++) {
+
+                    var opt = document.createElement('option');
+
+                    opt.value = city_l[i]
+                    opt.innerHTML = city_l[i];
+
+                    select.appendChild(opt);
+            }}
+
+
+            // Function to create unique city list
+            function onlyUnique(value, index, array) {
+                return array.indexOf(value) === index;
+            }                       
+        
+
+            // Function to hide the loader
+            function hideloader() {
+                document.getElementById('loading').style.display = 'none';
+            }
+
+            // Function to show table and connecting to event listener
+            function radioEventListener (x) {
+                    show_table(x)
+            }
+
+            // Function to define innerHTML for HTML table
+            function show_table() {
+
+                // Getting value from dropdown list
+                var d = drop_filter_selected()
+                if(!d) d = "all"
+                console.log('drop selected d: ', d)
+                
+
+                // Calling checkbox function with the returned value(s)
+                let c = check_selected()
+                console.log('check selected c: ', c)
+
+                    let tab =
+                        `<tr>
+                        <th>Index</th>
+                        <th>Berry Type</th>
+                        <th>Observation Date</th>
+                        <th>Main Tree Type</th>                        
+                        <th>Forest Development Class</th>
+                        <th>Week Number</th>                        
+                        <th>Temperature</th>
+                        <th>Humidity</th>
+                        <th>Wood Quality</th>
+                        <th>City Name</th>
+                        <th>Region</th>
+                        <th>Coordinates (X,Y)</th>
+                        <th>Altitude</th>
+                        </tr>`;
+            
+                    var filtered_data = data.data.filter(row => d == row[10] || d == "all").filter(row => c.includes(row[0]))
+                    console.log("filtered data is ")
+                    console.log(filtered_data)
+                    // Loop to access all rows
+                    
+                    for (i=0; i < filtered_data.length; i++){    
+                        r = filtered_data[i]
+                        s = i + 1
+
+                        // 0 : "berry_x"
+                        // 1 : "observation_date"
+                        // 2 : "main_tree_type"
+                        // 3 : "forest_development_class"
+                        // 4 : "week_number"
+                        // 5 : "y"
+                        // 6 : "x"
+                        // 7 : "temperature"
+                        // 8 : "humidity"
+                        // 9 : "wood_quality"
+                        // 10 : "city_name"
+                        // 11 : "region"
+                        // 12 : "altitude"
+                        // Creating table rows
+                        tab += `<tr>
+                        <td>${s}</td>
+                        <td>${r[0]}</td>
+                        <td>${r[1]}</td>
+                        <td>${r[2]}</td>
+                        <td>${r[3]}</td>		
+                        <td>${r[4]}</td>                                                		
+                        <td>${r[7]}°C</td>		
+                        <td>${r[8]}%</td>
+                        <td>${r[9]}</td>
+                        <td>${r[10]}</td>
+                        <td>${r[11]}</td>
+                        <td title='See on the Googel Map'><a href='https://www.google.com/maps/place/${r[5]},${r[6]}'>${r[6]},${r[5]}</a></td>
+                        <td>${r[12]} m</td>		
+                                
+                        </tr>`
+                    };           
+            
+                // Setting innerHTML as tab variable
+                document.getElementById("data_table").innerHTML = tab;
+
+                };
+       
+
+
+
+            // Function to get check box values
+            check_selected()
+            function check_selected () {
+              var ele=[]
+              var bilberry = document.getElementById('bilberry')
+              if(bilberry.checked){
+                    ele.push(bilberry.value);
+             }
+             var cloudberry = document.getElementById("cloudberry")
+              if(cloudberry.checked){
+                    ele.push(cloudberry.value);
+             }
+             var lingonberry = document.getElementById("lingonberry")
+              if(lingonberry.checked){
+                    ele.push(lingonberry.value);
+             }
+             
+               if(ele.length>0){ ele
+                
+                console.log("ele: " + ele)}
+                
+              else {'null'}
+
+              return ele
+            }
+
+
+            // Function to get selected city value from dropdown list
+            function drop_filter_selected () {
+                let selection = document.getElementById("city_option")
+                    for(i=0; i < selection.length; i++) {
+                        if (selection[i].selected == true) {
+                            console.log("filter_selected: " + selection[i].value)
+                            return selection[i].value
+                            
+                        }
+                    }            
+                }
+
+
+        </script>
+
+    </body>
+
+</html>
